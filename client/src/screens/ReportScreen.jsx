@@ -122,9 +122,17 @@ const ReportScreen = () => {
   useEffect(() => {
     const fetchMyAPI=async()=>{
       const {data} = await api.get('/reports')
-      const {studentsData} = data;
+      let {studentsData} = data;
+     
       if(studentsData.length>0){
-        setRows(studentsData)
+        setRows(
+          studentsData.map(item => {
+            const obj = Object.assign({}, item);
+            obj["bornDate"] = new Date(item.bornDate).toLocaleDateString();
+            obj["aliyahDate"] = new Date(item.aliyahDate).toLocaleDateString();
+            return obj;
+          })
+        )
       }
      
     }
