@@ -116,7 +116,7 @@ const ReportScreen = () => {
   const [rows,setRows]=useState([])
 
   const api = axios.create({
-    baseURL: 'https://ortsudents.herokuapp.com/api/reports',
+    baseURL: 'https://ortsudents.herokuapp.com/api',
 })
 
   useEffect(() => {
