@@ -101,9 +101,9 @@ function CustomToolbar() {
   
   return (
     <GridToolbarContainer>
-    <Button onClick={()=>alert('ok')}>
+  
      <GridToolbarExport />
-    </Button>
+   
    
     </GridToolbarContainer>
   );
