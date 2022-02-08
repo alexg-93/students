@@ -15,5 +15,19 @@ const getStudents = async (req, res) => {
     });
   
   };
+
+  //update all isExported property to true after clicked export
+export const updateAll = async (req, res) => {
+  console.log('updating all isExported to true..')
+ 
+  Student.updateMany({}, {'$set': {'isExported' : true}}, {multi: true},
+   function(error, properties){
+})
+
+res.status(201).json({
+  message: "updated",
+ 
+});
+}
   
 export default getStudents;

@@ -3,7 +3,7 @@ import NavBar from '../components/Navbar'
 import {DataGrid, GridToolbarContainer, GridToolbarExport,GridToolbar} from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 import axios from 'axios'
-import Button from "@mui/material/Button";
+import CsvDownload from 'react-json-to-csv'
 
 const columns = [
   //{ field: '_id', headerName: 'ID', width: 90 },
@@ -130,9 +130,14 @@ const ReportScreen = () => {
     }
 
     fetchMyAPI()
-   
+
   }, [])
 
+  const handleUpdateExported = async()=>{
+    
+    await api.put('/reports');
+    
+  }
 
 
  
@@ -140,11 +145,25 @@ const ReportScreen = () => {
   return(
    <>
     <NavBar/>
-
-  
-      <Box sx={{display:'grid',width:'100%',height:500}} mt={20} pr={2} pl={2}
+    <Box sx={{width:'200px'}} mt={20} ml={2} onClick={handleUpdateExported}>
+     
+    <CsvDownload 
+    data={rows.filter((item)=>{
+      return item.isExported===false
+    })}
+    filename="students.csv"
+   
+  >
+    Download latest students CSV 
+    
+    <svg className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="SaveAltIcon"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"></path></svg>
+  </CsvDownload>
+ </Box>
+   
+      <Box sx={{display:'grid',width:'100%',height:500}} mt={10} pr={2} pl={2}
        
         >
+  
        <DataGrid
         rows={rows}
         columns={columns}
