@@ -11,7 +11,7 @@ import reportsRoutes from './routes/reportsRoutes.js'
 
 dotenv.config()
 connectDB()
-
+const __dirname = path.resolve()
 const app = express();
 
 app.use(express.json())
@@ -25,6 +25,11 @@ app.use('/api/reports', reportsRoutes);
 
 if(process.env.NODE_ENV==='development'){
   app.use(morgan('dev'))
+  app.use(express.static(path.join(__dirname,'/client/build')))
+
+  app.get('*',(req,res)=>{
+    res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+  })
 }
 
 const port = process.env.PORT || 8000;
