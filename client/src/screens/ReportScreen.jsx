@@ -173,15 +173,6 @@ const ReportScreen = () => {
         disableSelectionOnClick
         components={{ Toolbar: CustomToolbar}}
         getRowId={(row) => row._id}
-        // initialState={{
-        //   filter: {
-        //     filterModel: {
-        //       items: [
-        //         { columnField: 'isExported', operatorValue:'is', value:'true' },
-        //       ],
-        //     },
-        //   },
-        // }}
         sx={{
           boxShadow: 10,
           border: 2,
